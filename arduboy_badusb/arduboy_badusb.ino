@@ -46,7 +46,7 @@ const char * const options_hid_menu[] PROGMEM =
 
 // Options Payloads Windows
 const char option_windows_menu0[] PROGMEM = "Scanner";
-const char option_windows_menu1[] PROGMEM = "Fork bomb";
+const char option_windows_menu1[] PROGMEM = "ReverseShell";
 const char option_windows_menu2[] PROGMEM = "No Defenses";
 const char option_windows_menu3[] PROGMEM = "Mimikatz passwd";
 const char option_windows_menu4[] PROGMEM = "RickRoll";
@@ -215,7 +215,7 @@ void loop(void)
       HelloWorld_Gnome();
     }
     else if(selectedIndex == 1 & mode == 2) {
-      ForkBomb();
+      ReverseShell();
     }
     else if(selectedIndex == 0 & mode == 2) {
       Scanner();
