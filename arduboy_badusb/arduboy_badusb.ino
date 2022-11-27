@@ -49,7 +49,8 @@ const char option_windows_menu0[] PROGMEM = "Scanner";
 const char option_windows_menu1[] PROGMEM = "ReverseShell";
 const char option_windows_menu2[] PROGMEM = "No Defenses";
 const char option_windows_menu3[] PROGMEM = "Mimikatz passwd";
-const char option_windows_menu4[] PROGMEM = "RickRoll";
+const char option_windows_menu4[] PROGMEM = "Steal Directory";
+
 
 // Put options Payload Windows into an array
 const char * const options_windows_menu[] PROGMEM =
@@ -59,12 +60,11 @@ const char * const options_windows_menu[] PROGMEM =
   option_windows_menu2,
   option_windows_menu3,
   option_windows_menu4,
-
 };
 
 // Options Payload Linux
 const char option_linux_menu0[] PROGMEM = "Hello World";
-const char option_linux_menu1[] PROGMEM = "Basic Terminal Commands";
+const char option_linux_menu1[] PROGMEM = "Reverse Shell";
 
 // Put options Payload Linux into an array
 const char * const options_linux_menu[] PROGMEM =
@@ -74,12 +74,16 @@ const char * const options_linux_menu[] PROGMEM =
 };
 
 // Options Payload MacOS X
-const char option_macos_menu0[] PROGMEM = "Passwordless SSH access & SSH Keys";
+const char option_macos_menu0[] PROGMEM = "PasswordlessSSH";
+const char option_macos_menu1[] PROGMEM = "Sudo for Everyone";
+const char option_macos_menu2[] PROGMEM = "File Execution";
 
 // Put options Payloads MacOS into an array
 const char * const options_macos_menu[] PROGMEM =
 {
   option_macos_menu0,
+  option_macos_menu1,
+  option_macos_menu2,
 };
 
 // Options Payload Android
@@ -94,10 +98,9 @@ const char * const options_android_menu[] PROGMEM =
 
 // Options Password Manager Menu
 const char option_manager_menu0[] PROGMEM = "Twitter Password";
-const char option_manager_menu1[] PROGMEM = "Server 1 Password";
-const char option_manager_menu2[] PROGMEM = "Bank Pin";
-const char option_manager_menu3[] PROGMEM = "Server 1 Password";
-const char option_manager_menu4[] PROGMEM = "RPI Password";
+const char option_manager_menu1[] PROGMEM = "Kali Session";
+const char option_manager_menu2[] PROGMEM = "Google Account";
+const char option_manager_menu3[] PROGMEM = "Outlook email";
 
 // Put init menu into an array
 const char * const options_manager_menu[] PROGMEM =
@@ -106,7 +109,6 @@ const char * const options_manager_menu[] PROGMEM =
   option_manager_menu1,
   option_manager_menu2,
   option_manager_menu3,
-  option_manager_menu4,
 };
 
 const uint8_t optionCount = sizeof(options_init_menu) / sizeof(options_init_menu[0]);
@@ -132,8 +134,6 @@ uint8_t optionMenuCount = optionCount;
 void setpassword() {
   Keyboard.print(user);
   delay(500);
-  Keyboard.press(KEY_TAB);
-  delay(100);
   Keyboard.releaseAll();
   delay(500);
   Keyboard.press(KEY_RETURN);
@@ -180,6 +180,7 @@ void loop(void)
 
   // Options select menu
   if(arduboy.justPressed(B_BUTTON)){
+    
     if(selectedIndex == 0 & mode == 5) {
       user = user1;
       pass = password1;
@@ -200,16 +201,17 @@ void loop(void)
       pass = password4;
       setpassword();
     }
-    else if(selectedIndex == 4 & mode == 5) {
-      user = user5;
-      pass = password5;
-      setpassword();
-    }
     else if(selectedIndex == 0 & mode == 4) {
       PasswordlessSSH();
     }
+    else if(selectedIndex == 1 & mode == 4) {
+      EasySudo();
+    }
+    else if(selectedIndex == 2 & mode == 4) {
+      Command();
+    }
     else if(selectedIndex == 1 & mode == 3) {
-      BasicTerminalCommands();
+      BasicReverseShell();
     }
     else if(selectedIndex == 0 & mode == 3) {
       HelloWorld_Gnome();
@@ -227,8 +229,9 @@ void loop(void)
       Mimikatz_ftp();
     }
     else if(selectedIndex == 4 & mode == 2) {
-      RickRoll();
+      DirectoryGrabber();
     }
+
     else if(selectedIndex == 0 & mode == 1) {
       mode = 2;
       optionMenuCount = optionCount_windows;
@@ -250,6 +253,13 @@ void loop(void)
       maxIndex = optionMenuCount - 1;
       //selected_payload();
     }
+    else if(selectedIndex == 3 & mode == 1) {
+      mode = 4;
+      optionMenuCount = optionCount_android;
+      
+      maxIndex = optionMenuCount - 1;
+      //selected_payload();
+    }
     else if(selectedIndex == 2 & mode == 0) {
       mode = 5;
       optionMenuCount = optionCount_manager;
@@ -258,7 +268,7 @@ void loop(void)
     }
      else if(selectedIndex == 1 & mode == 0) 
     {
-      /*FingerprintUSBHost.guessHostOS(os);
+      FingerprintUSBHost.guessHostOS(os);
       Serial.println(os);
       arduboy.clear();
   
@@ -272,7 +282,7 @@ void loop(void)
       delay(5000);
        
       maxIndex = optionMenuCount - 1;
-      welcome_screen();*/
+      loop();
           
     }
     else if(selectedIndex == 0 & mode == 0)
@@ -363,8 +373,10 @@ void welcome_screen(void){
   // Set cursor position
   arduboy.setCursor(0, 0);
 
-  arduboy.println(F("ARDUBOY Hacking"));
-
+  arduboy.println(F("Happy ArduHacking"));
+  arduboy.println(F("--------------------"));
+  arduboy.println(F("By HugoRD"));
+  
   arduboy.display();
   
   delay(3000);

