@@ -14,12 +14,12 @@ String os;
 
 Arduboy2 arduboy;
 
-// Options init Menu
+// Iniciamos el menu de opciones
 const char option_init_menu0[] PROGMEM = "BadUSB";
 const char option_init_menu1[] PROGMEM = "Detect OS";
 const char option_init_menu2[] PROGMEM = "Password Manager";
 
-// Put init menu into an array
+// Array menu
 const char * const options_init_menu[] PROGMEM =
 {
   option_init_menu0,
@@ -28,14 +28,14 @@ const char * const options_init_menu[] PROGMEM =
 
 };
 
-// Options BadUSB Menu
+// BadUSB OS menu
 const char option_hid_menu0[] PROGMEM = "Windows";
 const char option_hid_menu1[] PROGMEM = "Linux";
 const char option_hid_menu2[] PROGMEM = "MacOS";
 const char option_hid_menu3[] PROGMEM = "Android";
 
 
-// Put init menu into an array
+// Array BadUSB 
 const char * const options_hid_menu[] PROGMEM =
 {
   option_hid_menu0,
@@ -44,7 +44,7 @@ const char * const options_hid_menu[] PROGMEM =
   option_hid_menu3,
 };
 
-// Options Payloads Windows
+// Payloads Windows
 const char option_windows_menu0[] PROGMEM = "Scanner";
 const char option_windows_menu1[] PROGMEM = "ReverseShell";
 const char option_windows_menu2[] PROGMEM = "No Defenses";
@@ -52,7 +52,7 @@ const char option_windows_menu3[] PROGMEM = "Mimikatz passwd";
 const char option_windows_menu4[] PROGMEM = "Steal Directory";
 
 
-// Put options Payload Windows into an array
+// Arry payloads Windows 
 const char * const options_windows_menu[] PROGMEM =
 {
   option_windows_menu0,
@@ -62,23 +62,23 @@ const char * const options_windows_menu[] PROGMEM =
   option_windows_menu4,
 };
 
-// Options Payload Linux
+// Payloads Linux
 const char option_linux_menu0[] PROGMEM = "Hello World";
 const char option_linux_menu1[] PROGMEM = "Reverse Shell";
 
-// Put options Payload Linux into an array
+// Arry payloads Linux 
 const char * const options_linux_menu[] PROGMEM =
 {
   option_linux_menu0,
   option_linux_menu1,
 };
 
-// Options Payload MacOS X
+// Payloads MacOS X
 const char option_macos_menu0[] PROGMEM = "PasswordlessSSH";
 const char option_macos_menu1[] PROGMEM = "Sudo for Everyone";
 const char option_macos_menu2[] PROGMEM = "File Execution";
 
-// Put options Payloads MacOS into an array
+// Arry payloads MacOS X 
 const char * const options_macos_menu[] PROGMEM =
 {
   option_macos_menu0,
@@ -86,23 +86,23 @@ const char * const options_macos_menu[] PROGMEM =
   option_macos_menu2,
 };
 
-// Options Payload Android
+// Payloads Android
 const char option_android_menu0[] PROGMEM = "Passcode Bypass";
 
-// Put options Payload Android into an array
+// Arry payloads Android 
 const char * const options_android_menu[] PROGMEM =
 {
   option_android_menu0,
 };
 
 
-// Options Password Manager Menu
+// Menu Gestor de contraseñas
 const char option_manager_menu0[] PROGMEM = "Twitter Password";
 const char option_manager_menu1[] PROGMEM = "Kali Session";
 const char option_manager_menu2[] PROGMEM = "Google Account";
 const char option_manager_menu3[] PROGMEM = "Outlook email";
 
-// Put init menu into an array
+// Array menu gestor de contraseñas
 const char * const options_manager_menu[] PROGMEM =
 {
   option_manager_menu0,
@@ -111,6 +111,7 @@ const char * const options_manager_menu[] PROGMEM =
   option_manager_menu3,
 };
 
+// Medimos tamaño de los arrays para controlar el contenido
 const uint8_t optionCount = sizeof(options_init_menu) / sizeof(options_init_menu[0]);
 const uint8_t optionCount_hid = sizeof(options_hid_menu) / sizeof(options_hid_menu[0]);
 const uint8_t optionCount_windows = sizeof(options_windows_menu) / sizeof(options_windows_menu[0]);
@@ -124,13 +125,14 @@ const __FlashStringHelper * FlashString(const char * string)
   return reinterpret_cast<const __FlashStringHelper *>(string);
 }
 
-// The variable for storing the index of currently selected item.
+// Almacenamos el valor de la opcion seleccionada
 uint8_t maxIndex = optionCount - 1;
 uint8_t selectedIndex;
 
 uint8_t mode = 0;
 uint8_t optionMenuCount = optionCount;
 
+// Funcion para introducir las contraseñas en el box
 void setpassword() {
   Keyboard.print(user);
   delay(500);
@@ -164,7 +166,7 @@ void loop(void)
   // Update buttons so 'justPressed' works
   arduboy.pollButtons();
 
-  // Selection Arrow
+  // Configurar botones
   if(arduboy.justPressed(UP_BUTTON))
   {
     if(selectedIndex > 0)
@@ -178,7 +180,7 @@ void loop(void)
   }
 }
 
-  // Options select menu
+  // Seleccion de opciones
   if(arduboy.justPressed(B_BUTTON)){
     
     if(selectedIndex == 0 & mode == 5) {
@@ -237,28 +239,28 @@ void loop(void)
       optionMenuCount = optionCount_windows;
       
       maxIndex = optionMenuCount - 1;
-      //selected_payload();
+
     }
     else if(selectedIndex == 1 & mode == 1) {
       mode = 3;
       optionMenuCount = optionCount_linux;
       
       maxIndex = optionMenuCount - 1;
-      //selected_payload();
+
     }
     else if(selectedIndex == 2 & mode == 1) {
       mode = 4;
       optionMenuCount = optionCount_macos;
       
       maxIndex = optionMenuCount - 1;
-      //selected_payload();
+
     }
     else if(selectedIndex == 3 & mode == 1) {
       mode = 4;
       optionMenuCount = optionCount_android;
       
       maxIndex = optionMenuCount - 1;
-      //selected_payload();
+
     }
     else if(selectedIndex == 2 & mode == 0) {
       mode = 5;
@@ -294,7 +296,7 @@ void loop(void)
     }
   }
 
-  // Back button  
+  // Boton para retroceder a la pantalla anterior  
   if(arduboy.justPressed(A_BUTTON))
   {  
     mode = 0;
@@ -309,18 +311,16 @@ void loop(void)
   // Set cursor position
   arduboy.setCursor(0, 0);
 
-  // Loop through all options
+  // Loop para todas las opciones
   for(uint8_t i = 0; i < optionMenuCount; ++i)
   {
-    // If the current option is the selected option;
+    // Colocar flecha en la opcion que se ha seleccionado
     if(i == selectedIndex)
     {
-      // Draw an arrow
       arduboy.print(F("> "));
     }
     else
     {
-      // Otherwise just indent
       arduboy.print(F("  "));
     }
   
@@ -342,30 +342,7 @@ void loop(void)
    arduboy.display();
 }
 
-/*void selected_payload(){
-  
-  // MacOS X
-  if(arduboy.justPressed(A_BUTTON) & selectedIndex == 0 & mode == 4) {
-    PasswordlessSSH();
-  }
-    
-  // Linux
-  if(arduboy.justPressed(A_BUTTON) & selectedIndex == 0 & mode == 3) {
-    HelloWorld_Gnome();
-  }
-  if(arduboy.justPressed(A_BUTTON) & selectedIndex == 1 & mode == 3) {
-    BasicTerminalCommands();
-  }
-
-  // Windows
-  if(arduboy.justPressed(A_BUTTON) & selectedIndex == 0 & mode == 2) {
-    HelloWorld_Win();
-  }
-  if(arduboy.justPressed(A_BUTTON) & selectedIndex == 1 & mode == 2) {
-    ForkBomb();
-  }
-}*/
-
+// Pantalla de bienvenida
 void welcome_screen(void){
   // Clear screen buffer
   arduboy.clear();
@@ -382,6 +359,7 @@ void welcome_screen(void){
   delay(3000);
 }
 
+// Contraseña para acceder al ArduHacking
 void enterpin(void){  
   // Clear screen buffer
   arduboy.clear();

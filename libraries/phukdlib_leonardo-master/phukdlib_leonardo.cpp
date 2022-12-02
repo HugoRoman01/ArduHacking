@@ -4,9 +4,10 @@
 #include "phukdlib_leonardo.h"
 
 /********************************************************************
- * Opens the run bar and executes the command. 
+ * Opens the run bar and executes the command.
  ********************************************************************/
-void CommandAtRunBarMSWIN(char *SomeCommand){
+void CommandAtRunBarMSWIN(char *SomeCommand)
+{
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('r');
   delay(100);
@@ -20,7 +21,8 @@ void CommandAtRunBarMSWIN(char *SomeCommand){
 /********************************************************************
  * Run the program with admin privileges. -Joel Serna Moreno
  ********************************************************************/
-void RunProgramAdminMSWIN(char *SomeCommand){
+void RunProgramAdminMSWIN(char *SomeCommand)
+{
   Keyboard.press(KEY_LEFT_GUI);
   delay(100);
   Keyboard.releaseAll();
@@ -45,7 +47,8 @@ void RunProgramAdminMSWIN(char *SomeCommand){
 /********************************************************************
  * Minimize open windows. -Joel Serna Moreno
  ********************************************************************/
-void MinimizeWindowMSWIN(){
+void MinimizeWindowMSWIN()
+{
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('d');
   delay(100);
@@ -55,7 +58,8 @@ void MinimizeWindowMSWIN(){
 /********************************************************************
  * Open the search box. -Joel Serna Moreno
  ********************************************************************/
-void CommandOpenSearchMSWIN(){
+void CommandOpenSearchMSWIN()
+{
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('s');
   delay(100);
@@ -65,7 +69,8 @@ void CommandOpenSearchMSWIN(){
 /********************************************************************
  * Block active sessions. -Joel Serna Moreno
  ********************************************************************/
-void BlockSessionMSWIN(){
+void BlockSessionMSWIN()
+{
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('l');
   delay(100);
@@ -75,7 +80,8 @@ void BlockSessionMSWIN(){
 /********************************************************************
  * Close active program. -Joel Serna Moreno
  ********************************************************************/
-void CloseProgramsMSWIN(){
+void CloseProgramsMSWIN()
+{
   Keyboard.press(KEY_LEFT_ALT);
   Keyboard.press(KEY_F4);
   delay(100);
@@ -83,9 +89,10 @@ void CloseProgramsMSWIN(){
 }
 
 /********************************************************************
- * Opens the run bar and executes the command. 
+ * Opens the run bar and executes the command.
  ********************************************************************/
-void CommandAtRunBarGnome(char *SomeCommand){
+void CommandAtRunBarGnome(char *SomeCommand)
+{
   Keyboard.press(KEY_LEFT_ALT);
   Keyboard.press(KEY_F2);
   delay(100);
@@ -99,7 +106,8 @@ void CommandAtRunBarGnome(char *SomeCommand){
 /********************************************************************
  * Opens spotlight and executes the command. -Adam Baldwin
  ********************************************************************/
-void CommandAtRunBarOSX(char *SomeCommand){
+void CommandAtRunBarOSX(char *SomeCommand)
+{
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press(' ');
   delay(100);
@@ -107,29 +115,30 @@ void CommandAtRunBarOSX(char *SomeCommand){
   delay(1500);
   Keyboard.print(SomeCommand);
   Keyboard.press(KEY_RETURN);
-  Keyboard.releaseAll(); 
+  Keyboard.releaseAll();
 }
 
 /********************************************************************
  * Opens New Terminal and executes command. -Adam Baldwin
  ********************************************************************/
-void CommandAtNewTerminal(char *SomeCommand){
+void CommandAtNewTerminal(char *SomeCommand)
+{
   CommandAtRunBarOSX("Terminal");
-/*
-  // Open a new terminal in case another one was open
-  delay(1000);
-  Keyboard.set_modifier(MODIFIERKEY_GUI);
-  Keyboard.set_key1(KEY_N);
-  Keyboard.send_now(); // send strokes
-  Keyboard.set_modifier(0); //prep release of  control keys
-  Keyboard.set_key1(0); //have to do this to keep it from hitting key multiple times.
-  Keyboard.send_now(); //Send the key changes
-  delay(1500);
-  Keyboard.print(SomeCommand);
-  Keyboard.set_key1(KEY_ENTER); 
-  Keyboard.send_now();    
-  Keyboard.set_key1(0);
-*/
+  /*
+    // Open a new terminal in case another one was open
+    delay(1000);
+    Keyboard.set_modifier(MODIFIERKEY_GUI);
+    Keyboard.set_key1(KEY_N);
+    Keyboard.send_now(); // send strokes
+    Keyboard.set_modifier(0); //prep release of  control keys
+    Keyboard.set_key1(0); //have to do this to keep it from hitting key multiple times.
+    Keyboard.send_now(); //Send the key changes
+    delay(1500);
+    Keyboard.print(SomeCommand);
+    Keyboard.set_key1(KEY_ENTER);
+    Keyboard.send_now();
+    Keyboard.set_key1(0);
+  */
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('n');
   delay(100);
@@ -137,22 +146,23 @@ void CommandAtNewTerminal(char *SomeCommand){
   delay(1500);
   Keyboard.print(SomeCommand);
   Keyboard.press(KEY_RETURN);
-  Keyboard.releaseAll(); 
+  Keyboard.releaseAll();
 }
 
 /********************************************************************
  * Opens the run bar and executes the command. -Aaron Howell
  ********************************************************************/
-void ShrinkCurWinOSX(){
-/*
-  Keyboard.set_modifier(MODIFIERKEY_GUI); //clover key
-  Keyboard.set_key1(KEY_H); // clover-h hides window, clover-m minimizes window
-  Keyboard.send_now();
-  delay(250);
-  Keyboard.set_modifier(0);
-  Keyboard.set_key1(0);
-  Keyboard.send_now();
-*/
+void ShrinkCurWinOSX()
+{
+  /*
+    Keyboard.set_modifier(MODIFIERKEY_GUI); //clover key
+    Keyboard.set_key1(KEY_H); // clover-h hides window, clover-m minimizes window
+    Keyboard.send_now();
+    delay(250);
+    Keyboard.set_modifier(0);
+    Keyboard.set_key1(0);
+    Keyboard.send_now();
+  */
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('h');
   delay(100);
@@ -163,17 +173,18 @@ void ShrinkCurWinOSX(){
 /********************************************************************
  * Shrinks the active window to help hide it.
  ********************************************************************/
-void ShrinkCurWin(){
-/*
-  Keyboard.set_modifier(MODIFIERKEY_ALT);
-  Keyboard.set_key1(KEY_SPACE);
-  Keyboard.send_now(); 
-  delay(250);
-  Keyboard.set_modifier(0);
-  Keyboard.set_key1(0);
-  Keyboard.send_now();  
-  Keyboard.print("n");
-*/
+void ShrinkCurWin()
+{
+  /*
+    Keyboard.set_modifier(MODIFIERKEY_ALT);
+    Keyboard.set_key1(KEY_SPACE);
+    Keyboard.send_now();
+    delay(250);
+    Keyboard.set_modifier(0);
+    Keyboard.set_key1(0);
+    Keyboard.send_now();
+    Keyboard.print("n");
+  */
   Keyboard.press(KEY_LEFT_ALT);
   Keyboard.press(' ');
   delay(100);
@@ -182,26 +193,30 @@ void ShrinkCurWin(){
   Keyboard.print("n");
 }
 
-void ShrinkCurWinMSWIN(){
+void ShrinkCurWinMSWIN()
+{
   ShrinkCurWin();
 }
 
-void ShrinkCurWinGnome(){
+void ShrinkCurWinGnome()
+{
   ShrinkCurWin();
 }
 
 /********************************************************************
- * This function simplifies the pressing and releasing of a key.  
+ * This function simplifies the pressing and releasing of a key.
  ********************************************************************/
-void PressAndRelease(int KeyCode,int KeyCount){
-  int KeyCounter=0;
-  for (KeyCounter=0;  KeyCounter!=KeyCount; KeyCounter++){
-/*
-    Keyboard.set_key1(KeyCode); // use r key
-    Keyboard.send_now(); // send strokes
-    Keyboard.set_key1(0); 
-    Keyboard.send_now(); // send strokes
-*/
+void PressAndRelease(int KeyCode, int KeyCount)
+{
+  int KeyCounter = 0;
+  for (KeyCounter = 0; KeyCounter != KeyCount; KeyCounter++)
+  {
+    /*
+        Keyboard.set_key1(KeyCode); // use r key
+        Keyboard.send_now(); // send strokes
+        Keyboard.set_key1(0);
+        Keyboard.send_now(); // send strokes
+    */
     Keyboard.print(KeyCode);
   }
 }
@@ -221,47 +236,47 @@ int ledkeys(void)
 */
 
 /*********************************************************************
- * Returns TRUE if NUM Lock LED is on and FALSE otherwise. 
+ * Returns TRUE if NUM Lock LED is on and FALSE otherwise.
  *********************************************************************/
 /*
 boolean IsNumbOn(void)
 {
   if ((ledkeys() & 1) == 1){
     return true;
-  } 
+  }
   else {
     return false;
-  }      
+  }
 }
 */
 
 /*********************************************************************
- * Returns TRUE if Caps Lock LED is on and FALSE otherwise. 
+ * Returns TRUE if Caps Lock LED is on and FALSE otherwise.
  **********************************************************************/
 /*
 boolean IsCapsOn(void)
 {
   if ((ledkeys() & 2) == 2){
     return true;
-  } 
+  }
   else {
     return false;
-  }      
+  }
 }
 */
 
 /*********************************************************************
- * Returns TRUE if Scroll Lock LED is on and FALSE otherwise. 
+ * Returns TRUE if Scroll Lock LED is on and FALSE otherwise.
  **********************************************************************/
 /*
 boolean IsScrlOn(void)
 {
-  if ((ledkeys() & 4) == 4){    
+  if ((ledkeys() & 4) == 4){
     return true;
-  } 
+  }
   else {
     return false;
-  }      
+  }
 }
 */
 //********************************************************************
