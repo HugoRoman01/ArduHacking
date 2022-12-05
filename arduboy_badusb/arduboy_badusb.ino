@@ -1,5 +1,6 @@
 #include <Arduboy2.h>
 #include "Keyboard.h"
+#define   kbd_es_es
 #include "FingerprintUSBHost.h"
 #include "payloads_windows.h"
 #include "payloads_linux.h"
